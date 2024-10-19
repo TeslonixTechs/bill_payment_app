@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "Emote",
+    "slug": "emote",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/7627392_app_communication_chat_conversation_messages_icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/7627392_app_communication_chat_conversation_messages_icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#fff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/7627392_app_communication_chat_conversation_messages_icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "permissions": [
+        "AUDIO_RECORDING",
+        "CAMERA",
+        "CAMERA_ROLL",
+        "CONTACTS",
+        "LOCATION",
+        "MICROPHONE",
+        "PHONE_STATE",
+        "READ_EXTERNAL_STORAGE",
+        "RECORD_AUDIO",
+        "VIDEO_LIBRARY",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/7627392_app_communication_chat_conversation_messages_icon.png"
+    }
+  }
+}
