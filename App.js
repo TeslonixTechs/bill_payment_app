@@ -17,7 +17,7 @@ export default function App() {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName="main_app_screen"
+                initialRouteName="splash_screen"
                 screenOptions={{
                     headerShown: false
                 }}
@@ -31,7 +31,7 @@ export default function App() {
                 <Stack.Screen name="profile" component={ProfileScreen} />
                 <Stack.Screen name="chats" component={ChatScreen} />
                 <Stack.Screen name="message" component={MessageScreen} />
-                <Stack.Screen namee="view_notification" component={ShowNotificationScreen} />
+                <Stack.Screen name="view_notification" component={ShowNotificationScreen} />
             </Stack.Navigator>
         </NavigationContainer>        
     );

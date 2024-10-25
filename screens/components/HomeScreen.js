@@ -20,6 +20,7 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import Animated, { useSharedValue, withTiming, useAnimatedStyle } from "react-native-reanimated";
 import { postData } from "../data/posts";
 import { commentsData } from '../data/commentsData';
+import socket from '../utils/socket';
 const image1 = require('../data/Images/1.jpg');
 const image2 = require('../data/Images/12.jpg');
 const image3 = require('../data/Images/17.jpg');
@@ -27,6 +28,7 @@ const image4 = require('../data/Images/IMG_20240107_184951_929.jpg');
 const image5 = require('../data/Images/24.jpg');
 const image6 = require('../data/Images/I WILL UNCOVER AMAZON HIJACKERS FACE AND SEND THEM AWAY.jpeg');
 const HomeScreen = () => {
+    useEffect(()=>{socket.open();console.log(socket.connected);})
     const navigation = useNavigation();
     const image = require("../../assets/jota.jpg");
     const postImage = require("../../assets/palmer.jpg");

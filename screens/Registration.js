@@ -10,10 +10,15 @@ import {
     KeyboardAvoidingView,
     TouchableOpacity,
     Image,
-    ScrollView,
+    ActivityIndicator,
+    ScrollView
 } from "react-native";
-import { validateUsername, validateEmail, validateFullName, validatePassword, validateConfirmPassword } from './services/validations';
+import { validateUsername, validateEmail, validateFullName, validatePassword, validateConfirmPassword, validateGender } from './services/validations';
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
+import axios from 'axios';
+import { authregister } from './models/ApiRoutes';
+import { RadioButton } from 'react-native-paper';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Registration = () => {
     const navigation = useNavigation();
     const [fullname, setFullName] = useState("");
@@ -24,11 +29,9 @@ const Registration = () => {
     const [birthday, setBirthDay] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [isShowPassword, setIsShowPassword] = useState(true);
-    // const EmailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    // const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/;
-    // const hasDigit = /\d/;
-    // const hasUpperCase = /[A-Z]/;
-    // const hasLowerCase = /[a-z]/;
+    const [isLoading, setIsLoading] = useState(false);
+    const [gender, setGender] = useState('');
+    const [phonenumber, setPhonenumber] = useState('');
     useEffect(()=>{
         setFullName("");
         setUserName("");
@@ -37,7 +40,7 @@ const Registration = () => {
         setConfirmPassword("");
         setBirthDay("");
     },[navigation]);
-    const handleRegistration = () => {
+    const handleRegistration = async () => {
         if(!fullname) {
             return setErrorMessage('Enter your fullname');
         }
@@ -56,6 +59,9 @@ const Registration = () => {
         if(!email) {
             return setErrorMessage('Enter your email address');
         }
+        if(!gender) {
+            return setErrorMessage('Select your gender')
+        }
         if(!validateEmail(email)) {
             return setErrorMessage('Enter a correct email address');
         }
@@ -71,7 +77,23 @@ const Registration = () => {
         if(!validateConfirmPassword(password, confirmPassword)) {
             return setErrorMessage('Incorrect password confirmation');
         }
+        try {
+            setIsLoading(true);
+        const data = {
+            name:fullname,
+            email: email,
+            username: username,
+            password: password,
+            gender: gender,
+            birthday: birthday
+        };
+        const response = await axios.post(authregister, data)
+        .then((response)=>())
+    } catch (error) {
+        setIsLoading(false);
+        console.log(error);
         // navigation.navigate('main_app_screen');
+    }
     };
     return (
         <ScrollView className="h-full w-full flex bg-white" showsVerticalScrollIndicator={false}>
@@ -110,6 +132,15 @@ const Registration = () => {
                         <TextInput onChangeText={(text)=>{setEmail(text)}} className="w-80 h-12 border-slate-300 rounded-2xl pl-5 border-2" />
                     </View>
                     <View className="block">
+                        <Text>Phone Number</Text>
+                        <TextInput maxLength={11} keyboardType="phone-pad" onChangeText={(text)=>{setPhonenumber(text)}} className="w-80 h-12 border-slate-300 rounded-2xl pl-5 border-2" />
+                    </View>
+                    <View className="flex-row justify-evenly">
+                        <View className="flex items-center"><RadioButton value="male" status={gender === 'male' ? 'checked' : 'unchecked'} onPress={()=> {setGender('male')}} size={20} color="blue" /><Text>male</Text></View>
+                        <View className="flex items-center"><RadioButton value="female" status={gender === 'female' ? 'checked' : 'unchecked'} onPress={()=> {setGender('female')}} size={20} color="blue" /><Text>female</Text></View>
+                        <View className="flex items-center"><RadioButton value="other" status={gender === 'other' ? 'checked' : 'unchecked'} onPress={()=> {setGender('other')}} size={20} color="blue" /><Text>other</Text></View>
+                    </View>
+                    <View className="block">
                         <Text>Password</Text>
                         <View className="relative w-80 h-12">
                             <TextInput
@@ -141,7 +172,7 @@ const Registration = () => {
                     </View>
                 </KeyboardAvoidingView>
                 <TouchableOpacity onPress={handleRegistration} className="w-80 rounded-2xl flex items-center justify-center h-12 bg-blue-800">
-                    <Text className="text-white">Register</Text>
+                    { isLoading ? <ActivityIndicator size={20} color="white" /> : <Text className="text-white">Register</Text> }
                 </TouchableOpacity>
                 <View className="flex flex-row space-x-3 items-center">
                     <Text>Already have an account</Text>

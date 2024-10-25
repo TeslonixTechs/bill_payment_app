@@ -18,6 +18,13 @@ export const validateEmail = (email) => {
     return emailRegex.test(email);
 };
 
+export const validateGender = (gender) => {
+    if(gender !== 'male' || gender !== 'female' || gender !== 'other') {
+        return false;
+    }
+    return true;
+}
+
 export const validatePassword = (password) => {
     const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/;
     const hasDigit = /\d/;

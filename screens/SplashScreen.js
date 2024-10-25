@@ -1,13 +1,20 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect } from "react";
 import { View, Text, Image, ImageBackground, ActivityIndicator } from "react-native";
-import { Permissions } from './utils/permissions'
+import { Permissions } from './utils/permissions';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const SplashScreen = () => {
     const navigation = useNavigation();
     useEffect(() => {
-        const timeoutNavigate = setTimeout(() => {
-            navigation.navigate('login_screen');
+        const timeoutNavigate = setTimeout(async() => {
+            const token = await AsyncStorage.getItem('token');
             Permissions();
+            if(!token){
+               navigation.navigate('login_screen');
+            }
+            else {
+                navigation.navigate('main_app_screen')
+            }
         }, 5000);
         return () => clearTimeout(timeoutNavigate);
     }, []);

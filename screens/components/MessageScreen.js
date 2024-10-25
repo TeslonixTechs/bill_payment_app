@@ -17,94 +17,154 @@ import {
 } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { FontAwesome } from "@expo/vector-icons";
-import ChatHeader from './ChatHeader'
+import ChatHeader from './ChatHeader';
+import socket from '../utils/socket';
+import { getTime } from "../services/getTime";
 const MessageScreen = () => {
     const scrollViewRef = useRef();
 	const navigation = useNavigation();
 	const { params } = useRoute();
 	const data = params?.data;
-	console.log(data);
 	const [inputText, setInputText] = useState('');
 	const [messages, setMessages] = useState([
 		{
 			type: 'received',
 			text: 'Hi',
-			time: '12:45'
+			time: '12:45',
+			isSent: true,
+			isDelivered: true,
+			SocketID: socket.id,
+			isActive: true
 		},
 		{
 			type: 'sent',
 			text: 'Hi',
-			time: '12:56'
-		},
-		{
-			type: 'sent',
-			text: 'How are you doing',
-			time: '12:57'
-		},
-		{
-			type: 'received',
-			text: 'Hi',
-			time: '13:45'
-		},
-		{
-			type: 'received',
-			text: 'All well',
-			time: '12:45'
-		},
-		{
-			type: 'sent',
-			text: 'Hi',
-			time: '12:45'
-		},
-		{
-			type: 'received',
-			text: 'Hi',
-			time: '12:56'
+			time: '12:56',
+			isSent: true,
+			isDelivered: true,
+			SocketID: socket.id,
+			isActive: true
 		},
 		{
 			type: 'sent',
 			text: 'How are you doing',
-			time: '12:57'
+			time: '12:57',
+			isSent: true,
+			isDelivered: true,
+			SocketID: socket.id,
+			isActive: true
 		},
 		{
-			type: 'sent',
+			type: 'received',
 			text: 'Hi',
-			time: '13:45'
+			time: '13:45',
+			isSent: true,
+			isDelivered: true,
+			SocketID: socket.id,
+			isActive: true
 		},
 		{
 			type: 'received',
 			text: 'All well',
-			time: '12:45'
+			time: '12:45',
+			isSent: true,
+			isDelivered: true,
+			SocketID: socket.id,
+			isActive: true
+		},
+		{
+			type: 'sent',
+			text: 'Hi',
+			time: '12:45',
+			isSent: true,
+			isDelivered: true,
+			SocketID: socket.id,
+			isActive: true
+		},
+		{
+			type: 'received',
+			text: 'Hi',
+			time: '12:56',
+			isSent: true,
+			isDelivered: true,
+			SocketID: socket.id,
+			isActive: true
+		},
+		{
+			type: 'sent',
+			text: 'How are you doing',
+			time: '12:57',
+			isSent: true,
+			isDelivered: true,
+			SocketID: socket.id,
+			isActive: true
+		},
+		{
+			type: 'sent',
+			text: 'Hi',
+			time: '13:45',
+			isSent: true,
+			isDelivered: true,
+			SocketID: socket.id,
+			isActive: true
+		},
+		{
+			type: 'received',
+			text: 'All well',
+			time: '12:45',
+			isSent: true,
+			isDelivered: true,
+			SocketID: socket.id,
+			isActive: true
 		}
 	]);
-	const getTime = () => {
-		const msgTimeHour = new Date().getHours();
-        const msgTimeMin = new Date().getMinutes();
-        let newMsgTimeHour;
-        let newMsgTimeMin;
-        if(msgTimeHour < 10){
-            newMsgTimeHour = '0'+msgTimeHour;
-        } else {
-            newMsgTimeHour = msgTimeHour;
-        }
-        if(msgTimeMin < 10){
-            newMsgTimeMin = '0'+msgTimeMin;
-        } else {
-            newMsgTimeMin = msgTimeMin;
-        }
-        const msgTime = newMsgTimeHour + ':' + newMsgTimeMin;
-        return msgTime;
-	};
+	// const getTime = () => {
+	// 	const msgTimeHour = new Date().getHours();
+    //     const msgTimeMin = new Date().getMinutes();
+    //     let newMsgTimeHour;
+    //     let newMsgTimeMin;
+    //     if(msgTimeHour < 10){
+    //         newMsgTimeHour = '0'+msgTimeHour;
+    //     } else {
+    //         newMsgTimeHour = msgTimeHour;
+    //     }
+    //     if(msgTimeMin < 10){
+    //         newMsgTimeMin = '0'+msgTimeMin;
+    //     } else {
+    //         newMsgTimeMin = msgTimeMin;
+    //     }
+    //     const msgTime = newMsgTimeHour + ':' + newMsgTimeMin;
+    //     return msgTime;
+	// };
 	const handleAddMessage = () => {
+		if(!inputText) { return; }
 		const newmsg = {
 			type: 'sent',
 			text: inputText,
-			time: `${getTime()}`
+			time: `${getTime()}`,
+			isSent: true,
+			isDelivered: true,
+			SocketID: socket.id,
+			isActive: true
 		};
+		socket.emit('sendmessage', newmsg);
 		setMessages((prevMessages)=> [...prevMessages, newmsg]); 
-		console.log(inputText);
 		setInputText('')
 	}
+	useEffect(()=>{
+		socket.on('recievemessage', (data)=>{
+			const receivemsg = {
+				type: 'received',
+				text: data.text,
+				time: data.time,
+				isSent: data.isSent,
+				isDelivered: data.isDelivered,
+				SocketID: data.SocketID,
+				isActive: data.isActive
+			};
+			setMessages((prevMessages)=> [...prevMessages, receivemsg]);
+		});
+	},[])
 	return (
 		<View className="h-full w-full bg-slate-200 flex">
 			<StatusBar />

@@ -149,6 +149,7 @@ const MessageScreen = () => {
                     )) }
                 </View>
             </ScrollView>
+            <TouchableOpacity className="h-14 w-14 rounded-full absolute bottom-10 right-3 bg-blue-800 flex justify-center items-center"><Icon name="plus" color="white" size={25} /></TouchableOpacity>
         </View>
     )
 };
