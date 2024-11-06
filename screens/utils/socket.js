@@ -4,5 +4,5 @@ const getToken = async() => {
 	const token = await AsyncStorage.getItem('token')
 	return token	
 }
-const socket = io('http://192.168.43.41:7000',{ query: getToken() });
+const socket = io('http://192.168.43.41:7000');
 export default socket;

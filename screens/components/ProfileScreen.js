@@ -18,10 +18,11 @@ import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { uploadMedia } from "../models/uploadMedia";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ProfileDetails from "./ProfileDetails";
+import FollowersDetails from './FollowersDetails';
 const ProfileScreen = () => {
     const navigation = useNavigation();
     const [profilepic, setProfilePic] = useState(
-        "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252Femote-3e05973e-6cfd-408b-b64d-381baa7a7a56/ImagePicker/3b6066e1-a89a-4130-81e1-bf5fc891be78.jpeg"
+        ""
     );
     const editProfilePicture = async () => {
         const pic = await uploadMedia("picture");
@@ -46,7 +47,7 @@ const ProfileScreen = () => {
             <Header heading="Profile" />
             <View className="w-full flex items-center pt-3">
                 <View className="relative flex-row items-end">
-                    <Avatar.Image size={140} source={{ uri: profilepic }} />
+                    { profilepic==="" ? <View className="h-36 w-36 bg-zinc-300 rounded-full flex items-center justify-center"><Icon name="account" color="grey" size={40} /></View> : <Avatar.Image size={140} source={{ uri: profilepic }} /> }
                     <TouchableOpacity
                         onPress={editProfilePicture}
                         className="h-12 absloute w-12 bg-white rounded-full -ml-8 flex justify-center items-center"
@@ -95,16 +96,10 @@ const ProfileScreen = () => {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <ProfileDetails />
-                <View className="flex items-center">
-                    <TouchableOpacity
-                        onPress={handleLogout}
-                        className="h-[50px] mt-7 rounded-3xl w-72 bg-red-600 flex-row justify-center items-center space-x-2"
-                    >
-                        <Icon name="logout" size={30} color={`white`} />
-                        <Text className="text-white text-base">Logout</Text>
-                    </TouchableOpacity>
-                </View>
+                { tab === 'profile' && (<ProfileDetails handleLogout={handleLogout} />) }
+                { tab === 'followers' && (<FollowersDetails />) }
+                { tab === 'photos' && (<View />) }
+                { tab === 'video' && (<View />) }
             </View>
         </View>
     );

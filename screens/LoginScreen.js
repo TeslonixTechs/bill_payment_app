@@ -32,40 +32,41 @@ const LoginScreen = () => {
         setIsShowPassword(true);
     },[navigation])
     const handleLogin = async () => {
-        if(!email) {
-            return setErrorMessage('Enter your email address');
-        }
-        if(!validateEmail(email)) {
-            return setErrorMessage('Enter a correct email address');
-        }
-        if(!password) {
-            return setErrorMessage('Enter your password');
-        }
-        if(!validatePassword(password)) {
-            return setErrorMessage('Enter a correct password');
-        }
-        const data = {
-            email: email,
-            password: password
-        };
-        try {
-            setIsLoading(true);
-            const response = await axios.post(authlogin, data);
-            // if(response.data.status !== '201') {
-            //     return setErrorMessage('Login failed')
-            // }
-            if(!response.data.auth) {
-                return setErrorMessage('Login failed');
-            }
-            const userdata = response.data.userdata;
-            const token = response.data.token;
-            console.log(JSON.stringify(userdata));
-            await AsyncStorage.setItem('token', token);
-            await AsyncStorage.setItem('userdata', JSON.stringify(userdata));
+        // if(!email) {
+        //     return setErrorMessage('Enter your email address');
+        // }
+        // if(!validateEmail(email)) {
+        //     return setErrorMessage('Enter a correct email address');
+        // }
+        // if(!password) {
+        //     return setErrorMessage('Enter your password');
+        // }
+        // if(!validatePassword(password)) {
+        //     return setErrorMessage('Enter a correct password');
+        // }
+        // const data = {
+        //     email: email,
+        //     password: password
+        // };
+        // try {
+        //     setIsLoading(true);
+        //     const response = await axios.post(authlogin, data);
+        //     // if(response.data.status !== '201') {
+        //     //     return setErrorMessage('Login failed')
+        //     // }
+        //     if(!response.data.auth) {
+        //         return setErrorMessage('Login failed');
+        //     }
+        //     const userdata = response.data.userdata;
+        //     const token = response.data.token;
+        //     console.log(JSON.stringify(userdata));
+        //     await AsyncStorage.setItem('token', token);
+        //     await AsyncStorage.setItem('userdata', JSON.stringify(userdata));
+        //     navigation.navigate('main_app_screen');
+        // } catch (error) {
+        //     console.log(error.response.data.errors[0].message);
+        //     }
             navigation.navigate('main_app_screen');
-        } catch (error) {
-            console.log(error.response.data.errors[0].message);
-            }
     };
     return (
         <View className="h-full w-full flex items-center bg-white">

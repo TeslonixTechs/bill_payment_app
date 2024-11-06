@@ -12,17 +12,24 @@ import ProfileScreen from "./screens/components/ProfileScreen";
 import ChatScreen from "./screens/components/ChatScreen";
 import MessageScreen from "./screens/components/MessageScreen";
 import ShowNotificationScreen from './screens/components/ShowNotificationScreen';
+import VerificationScreen from './screens/VerificationScreen';
+import CollectionScreen from './screens/components/CollectionScreen';
+import TermsPoliciesScreen from './screens/components/TermsPoliciesScreen';
+import HelpScreen from './screens/components/HelpScreen';
+import ActivityScreen from './screens/components/ActivityScreen';
+import BlockActivityScreen from './screens/components/BlockActivityScreen';
 export default function App() {
     const Stack = createNativeStackNavigator();
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName="splash_screen"
+                initialRouteName="main_app_screen"
                 screenOptions={{
                     headerShown: false
                 }}
             >
                 <Stack.Screen name="splash_screen" component={SplashScreen} />
+                <Stack.Screen name="verification_screen" component={VerificationScreen} />
                 <Stack.Screen name="login_screen" component={LoginScreen} />
                 <Stack.Screen name="registration_screen" component={Registration} />
                 <Stack.Screen name="main_app_screen" component={MainScreenTab} />
@@ -32,6 +39,11 @@ export default function App() {
                 <Stack.Screen name="chats" component={ChatScreen} />
                 <Stack.Screen name="message" component={MessageScreen} />
                 <Stack.Screen name="view_notification" component={ShowNotificationScreen} />
+                <Stack.Screen name="collection" component={CollectionScreen} />
+                <Stack.Screen name="termsandpolicies" component={TermsPoliciesScreen} />
+                <Stack.Screen name="help" component={HelpScreen} />
+                <Stack.Screen name="activity" component={ActivityScreen} />
+                <Stack.Screen name="block" component={BlockActivityScreen} />
             </Stack.Navigator>
         </NavigationContainer>        
     );

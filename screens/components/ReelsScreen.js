@@ -4,13 +4,13 @@ import { View, TouchableOpacity, Text, FlatList, Dimensions } from 'react-native
 // Make sure you've installed expo-av and imported it correctly
 import * as VideoThumbnails from 'expo-video-thumbnails';
 import { Audio, Video } from 'expo-av';
+import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 const file = require('../../assets/video-1.mp4')
 const VideoPlayer = () => {
   const [videos, setVideos] = useState([
     { id: 1, fileUri: file, likes: 100, comments: 20, liked: false },
     { id: 2, fileUri: file, likes: 50, comments: 10, liked: false },
     { id: 3, fileUri: file, likes: 200, comments: 30, liked: false },
-    // ...
   ]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -44,11 +44,12 @@ const VideoPlayer = () => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: 'black' }}>
+    <View style={{ flex: 1, backgroundColor: 'black' }} className="relative">
       <FlatList
         data={videos}
+        vertical={true}
         renderItem={({ item, index }) => (
-          <View style={{ width, height: height - 37}}>
+          <View style={{ width, height: height - 81}}>
             {index === currentIndex && (
               <Video
                 ref={(ref) => {
@@ -66,24 +67,22 @@ const VideoPlayer = () => {
                 shouldPlay={index === currentIndex}
                 style={{
                   width,
-                  height: height - 45,
+                  height: height,
                   backgroundColor: 'black',
                 }}
               />
             )}
-            <TouchableOpacity onPress={() => handleLike(index)} style={{ position: 'absolute', bottom: 10, left: 10 }}>
-              <Text style={{ color: item.liked ? 'red' : 'white' }}>{item.likes} likes</Text>
-            </TouchableOpacity>
-            <Text style={{ position: 'absolute', bottom: 10, right: 10, color: 'white' }}>
-              {item.comments} comments
-            </Text>
+            <View className="w-20 h-80 absolute bottom-0 right-0 flex items-center justify-evenly">
+              <TouchableOpacity onPress={()=>{handleLike(index)}} className="flex items-center"><Icon name={`${item.liked ? 'heart' : 'heart-outline'}`} color={`${item.liked ? 'red' : 'gainsboro'}`} size={30} /><Text className="text-slate-200">{item.likes}</Text></TouchableOpacity>
+              <TouchableOpacity className="flex items-center"><Icon name={`comment-outline`} color={`gainsboro`} size={30} /><Text className="text-slate-200">{item.comments}</Text></TouchableOpacity>
+              <TouchableOpacity className="flex items-center"><Icon name={`send-outline`} color={`gainsboro`} size={30} /><Text className="text-slate-200">{item.likes}</Text></TouchableOpacity>
+              <TouchableOpacity className="flex items-center"><Icon name={`bookmark-outline`} color={`gainsboro`} size={30} /><Text className="text-slate-200">{item.likes}</Text></TouchableOpacity>
+            </View>
           </View>
         )}
         keyExtractor={(item) => item.id.toString()}
-        vertical={true}
         showsVerticalScrollIndicator={false}
         pagingEnabled={true}
-        contentInset={{ bottom: 50 }}
         onViewableItemsChanged={({ viewableItems }) => {
           const newIndex = viewableItems[0].index;
           handlePagination(newIndex);
@@ -93,9 +92,8 @@ const VideoPlayer = () => {
           setCurrentIndex(nextIndex);
         }}
       />
-      <TouchableOpacity onPress={handleTap} style={{ position: 'absolute', top: 10, right: 10 }}>
-        <Text style={{ color: 'white' }}>{muted ? 'Unmute' : 'Mute'}</Text>
-      </TouchableOpacity>
+      <TouchableOpacity className="h-10 w-10 rounded-full bg-zinc-600 absolute top-[7%] flex justify-center items-center right-3" onPress={handleTap}><Icon name={`${muted ? 'volume-off' : 'volume-high'}`} size={17} color="ghostwhite" /></TouchableOpacity>
+      <View className="w-full px-5 flex-row justify-evenly items-center absolute top-5"><View className="h-1 rounded-3xl w-24 bg-slate-300" /><View className="h-1 rounded-3xl w-24 bg-slate-300" /><View className="h-1 rounded-3xl w-24 bg-slate-300" /></View>
     </View>
   );
 };

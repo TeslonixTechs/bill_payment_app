@@ -9,7 +9,7 @@ const SplashScreen = () => {
         const timeoutNavigate = setTimeout(async() => {
             const token = await AsyncStorage.getItem('token');
             Permissions();
-            if(!token){
+            if(token===null){
                navigation.navigate('login_screen');
             }
             else {

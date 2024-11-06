@@ -11,7 +11,7 @@ export const uploadMedia = (type) => {
             quality: 0.5,
         });
         return result;
-    } else {
+    } else if(type==="video") {
         const result = Picker.launchImageLibraryAsync({
             allowsEditing: true,
             mediaTypes: Picker.MediaTypeOptions.Videos,
@@ -23,5 +23,18 @@ export const uploadMedia = (type) => {
             quality: 0.5,
         });
         return result;
+    }
+    else {
+       const result = Picker.launchImageLibraryAsync({
+            allowsEditing: true,
+            mediaTypes: Picker.MediaTypeOptions.All,
+            aspect: [4, 3 ],
+            base64: true,
+            videoQuality: Picker.UIImagePickerControllerQualityType.Medium,
+            presentationStyle: Picker.UIImagePickerPresentationStyle.FULL_SCREEN,
+            preferredAssetRepresentationMode: Picker.UIImagePickerPreferredAssetRepresentationMode.Automatic,
+            quality: 0.5,
+        });
+        return result; 
     }
 };

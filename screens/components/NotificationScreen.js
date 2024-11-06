@@ -16,7 +16,7 @@ import {
 } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import Header from "./Header"
-import { notifications, setNotifications } from "../data/notificationData";
+import { notifications } from "../data/notificationData";
 const NotificationScreen = () => {
     const navigation = useNavigation();
     const handleShowNotification = (index) => {

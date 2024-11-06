@@ -1,7 +1,9 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 const NotificationHeader = ({data}) => {
+    const navigation = useNavigation();
     return (
         <View className="flex-row w-full bg-slate-100 h-24 justify-between px-2 items-center">
             <View className="flex-row space-x-5 items-center">
@@ -21,7 +23,7 @@ const NotificationHeader = ({data}) => {
                 </View>
             </View>
             <TouchableOpacity className="h-10 w-10 flex items-center justify-center rounded-full">
-                <Icon name="delete" size={30} />
+                <Icon name="delete-outline" size={30} />
             </TouchableOpacity>
         </View>
     );

@@ -29,6 +29,7 @@ const image5 = require('../data/Images/24.jpg');
 const image6 = require('../data/Images/I WILL UNCOVER AMAZON HIJACKERS FACE AND SEND THEM AWAY.jpeg');
 const HomeScreen = () => {
     useEffect(()=>{socket.open();console.log(socket.connected);})
+    const scrollViewRef = useRef();
     const navigation = useNavigation();
     const image = require("../../assets/jota.jpg");
     const postImage = require("../../assets/palmer.jpg");
@@ -93,7 +94,7 @@ const HomeScreen = () => {
     ])
     const [isClicked, setIsClicked] = useState(false);
     const [displayComments, setDisplayComments] = useState(false);
-    const scrollViewRef = useRef(null);
+    const [isLiked, setIsLicked] = useState(false);
     const translateY = useSharedValue(700);
     const [isSaved, setIsSaved] = useState(false);
     const [isPointerParentView, setIsPointerparentView] = useState('');
@@ -102,7 +103,7 @@ const HomeScreen = () => {
     const AlertBox = ({message}) => {
         return (
             <View className="h-full w-full bg-transparent flex items-center justify-center absolute top-0">
-                <View className="shadow-md h-32 rounded-xl w-72 bg-white flex justify-between pl-5 pr-2 pt-5 pb-2"><Text className="text-base">{message}</Text><TouchableOpacity onPress={()=>{setDisplayAlertBox(false)}} className="self-end flex justify-center items-center h-8 bg-blue-400 w-12 rounded-2xl"><Text className="text-base">ok</Text></TouchableOpacity></View>
+                <View className="shadow-md h-32 rounded-xl w-72 bg-white flex justify-between pl-5 pr-2 pt-5 pb-2"><Text className="text-base">{message}</Text><TouchableOpacity onPress={()=>{setDisplayAlertBox(false)}} className="self-end flex justify-center items-center h-8 bg-blue-200 w-12 rounded-2xl"><Text className="text-base">ok</Text></TouchableOpacity></View>
             </View>
         );
     };
@@ -163,6 +164,9 @@ const HomeScreen = () => {
     };
     const photopic = require('../data/Images/12.jpg');
     const handleAddComment = () => {
+        if(!commentInputValue.trim()) {
+            return
+        }
         const newcomment = {
             id: commentsData.length+1,
             name: 'Teslonix',
@@ -171,6 +175,7 @@ const HomeScreen = () => {
             comment: commentInputValue
         };
         setDisplayCommentsData((prevComment)=>[...prevComment,newcomment])
+        setCommentInputValue('');
     };
     return (
         <View ref={scrollViewRef} className="flex-1 bg-white relative">
@@ -183,8 +188,7 @@ const HomeScreen = () => {
                 </View>
             </View>
             <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
-                <View className="h-32 flex space-y-2 w-full border-b border-slate-300">
-                    <Text className="pl-5 mt-2 text-base">Story</Text>
+                <View className="h-28 flex space-y-2 w-full border-b border-slate-300">
                     <ScrollView className="flex-1" horizontal={true} showsHorizontalScrollIndicator={false}>
                         <View className="flex-row px-5 space-x-4 items-center">
                             <TouchableOpacity className="h-20 w-20 rounded-full bg-blue-400 p-1">
@@ -201,7 +205,7 @@ const HomeScreen = () => {
                 <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
                     <View className="flex space-y-10 items-center py-8">
                         {postData.map((item, index) => (
-                            <View key={index} className="flex w-full space-y-3">
+                            <View key={index} className="flex w-full space-y-2">
                                 <View className="flex-row justify-between w-full px-3">
                                     <View className="flex-row space-x-2">
                                         <Image source={item.image} resizeMode="cover" className="h-12 w-12 rounded-full" />
@@ -217,7 +221,7 @@ const HomeScreen = () => {
                                 <ImageBackground
                                     source={item.postImage}
                                     resizeMode="cover"
-                                    className="w-full rounded-xl h-[400px]"
+                                    className="w-full rounded-xl h-[300px]"
                                 />
                                 <View className="flex-row items-center justify-between px-4">
                                     <View className="flex-row space-x-2">
@@ -263,7 +267,8 @@ const HomeScreen = () => {
                         <View className="h-1 w-16 bg-gray-500 rounded-xl"></View>
                         <Text className="text-xl font-bold my-3">Comments</Text>
                     </View>
-                    <ScrollView className="flex-1 border-y border-slate-300">
+                    <ScrollView className="flex-1 border-y border-slate-300" ref={scrollViewRef}
+                    onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}>
                         <View className="py-5 flex space-y-5">
                             {displayCommentsData.map((item, index) => (
                                 <View key={index} className="flex-row items-center pl-3">
@@ -287,7 +292,7 @@ const HomeScreen = () => {
                     </ScrollView>
                     <View className="w-full flex-row items-center justify-center px-2 py-2 space-x-2 relative">
                         <Image source={image} resizeMode="contain" className="h-10 w-10 rounded-full" />
-                        <TextInput onChangeText={(text)=>{setCommentInputValue(text)}} className="bg-zinc-200 flex-1 h-11 rounded-2xl pl-3" placeholder="Comment" />
+                        <TextInput value={commentInputValue} onChangeText={(text)=>{setCommentInputValue(text)}} className="bg-slate-200 flex-1 h-11 rounded-2xl pl-3" placeholder="Comment" />
                         <TouchableOpacity onPress={handleAddComment} className="absolute right-2 h-11 w-11 rounded-full flex items-center justify-center">
                             <Icon name="send-outline" size={20} />
                         </TouchableOpacity>

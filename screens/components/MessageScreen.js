@@ -170,7 +170,7 @@ const MessageScreen = () => {
 			<StatusBar />
 			<ChatHeader data={data} />
 			<KeyboardAvoidingView
-				className="bg-white"
+				className=""
                 style={{ flex: 1 }}
             >
                 <ScrollView
@@ -191,11 +191,12 @@ const MessageScreen = () => {
                         )) }
                     </View>
                 </ScrollView>
-                <View className="w-full h-14 flex-row">
-                	<TextInput onChangeText={(text)=>{setInputText(text)}} value={inputText} className="flex-1 h-12 bg-gray-100 rounded-3xl pl-4"
+                <View className="w-full h-14 flex-row bg-transparent">
+                	<TextInput onChangeText={(text)=>{setInputText(text)}} value={inputText} className="flex-1 h-fit bg-gray-100 rounded-3xl pl-4 pr-2"
                 		placeholder="Type your message here"
+                		multiline
           			/>
-                	<TouchableOpacity onPress={handleAddMessage} className="h-12 w-12 bg-slate-200 rounded-full flex items-center justify-center"><FontAwesome size={17} name="send" /></TouchableOpacity>
+                	<TouchableOpacity onPress={handleAddMessage} className="h-12 w-12 bg-slate-300 rounded-full flex items-center justify-center"><FontAwesome size={17} name="send" /></TouchableOpacity>
                 </View>
             </KeyboardAvoidingView>
             <TouchableOpacity onPress={()=>{scrollViewRef.current.scrollToEnd({ animated: true })}} className="h-9 w-9 z-10 rounded-full bg-zinc-300 flex justify-center items-center absolute bottom-16 right-2"><Icon name="chevron-double-down" size={20} color={`grey`} /></TouchableOpacity>

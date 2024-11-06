@@ -39,14 +39,14 @@ const SettingsScreen = () => {
                 <View>
                     <Text className="my-4 px-3">App archives</Text>
                     <View>
-                        <TouchableOpacity className="flex-row justify-between items-center px-3 py-4 mb-2">
+                        <TouchableOpacity onPress={()=>{navigation.navigate('collection')}} className="flex-row justify-between items-center px-3 py-4 mb-2">
                             <View className="flex-row space-x-3 items-center">
                                 <Icon size={30} name="bookmark-outline" />
                                 <Text>Saved</Text>
                             </View>
                             <Icon size={30} name="chevron-right" />
                         </TouchableOpacity>
-                        <TouchableOpacity className="flex-row justify-between items-center px-3 py-4 mb-2">
+                        <TouchableOpacity onPress={()=>{navigation.navigate('activity')}} className="flex-row justify-between items-center px-3 py-4 mb-2">
                             <View className="flex-row space-x-3 items-center">
                                 <Icon size={30} name="graph" />
                                 <Text>Activity</Text>
@@ -72,7 +72,7 @@ const SettingsScreen = () => {
                             </View>
                             <Icon size={30} name="chevron-right" />
                         </TouchableOpacity>
-                        <TouchableOpacity className="flex-row justify-between items-center px-3 py-4 mb-2">
+                        <TouchableOpacity onPress={()=>{navigation.navigate('block')}} className="flex-row justify-between items-center px-3 py-4 mb-2">
                             <View className="flex-row space-x-3 items-center">
                                 <Icon size={30} name="block-helper" />
                                 <Text>Block</Text>
@@ -84,7 +84,7 @@ const SettingsScreen = () => {
                 <View>
                     <Text className="my-4 px-3">More info and support</Text>
                     <View>
-                        <TouchableOpacity className="flex-row justify-between items-center px-3 py-4 mb-2">
+                        <TouchableOpacity onPress={()=>{navigation.navigate('help')}} className="flex-row justify-between items-center px-3 py-4 mb-2">
                             <View className="flex-row space-x-3 items-center">
                                 <Icon size={30} name="help-circle-outline" />
                                 <Text>Help</Text>
@@ -98,7 +98,7 @@ const SettingsScreen = () => {
                             </View>
                             <Icon size={30} name="chevron-right" />
                         </TouchableOpacity>
-                        <TouchableOpacity className="flex-row justify-between items-center px-3 py-4 mb-2">
+                        <TouchableOpacity onPress={()=>{navigation.navigate('termsandpolicies')}} className="flex-row justify-between items-center px-3 py-4 mb-2">
                             <View className="flex-row space-x-3 items-center">
                                 <Icon size={30} name="note-outline" />
                                 <Text>Terms and policies</Text>
