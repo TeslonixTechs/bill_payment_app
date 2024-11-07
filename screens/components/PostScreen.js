@@ -11,21 +11,38 @@ import {
     TouchableOpacity,
     Image,
     ScrollView,
-    Animated,
     PanResponder,
 } from "react-native";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 import { uploadMedia } from "../models/uploadMedia";
+import Animated, { useSharedValue, withTiming, useAnimatedStyle } from "react-native-reanimated";
 const PostScreen = () => {
+    const navigation = useNavigation();
     const [postmedia, setPostMedia] = useState('');
+    const translateY = useSharedValue(300);
+    const [selectAction, setSelectAction] = useState(false);
+    const animatedStyleY = useAnimatedStyle(() => {
+        return {
+            transform: [{ translateY: translateY.value }],
+        };
+    });
+    useEffect(() => {
+        if (selectAction) {
+            translateY.value = withTiming(0, { duration: 1000 });
+        } else {
+            translateY.value = withTiming(700, { duration: 1000 });
+        }
+    }, [selectAction]);
     const handleUploadMedia = async () => {
-        const upload = await uploadMedia("all");
-        setPostMedia(upload.assets[0].uri);
-        console.log(upload);
-        console.log(postmedia);
+        setSelectAction((prev)=>(!prev))
     };
+    const handlegallery = async () => {
+        const media = await uploadMedia();
+        setPostMedia(media.assets[0].uri);
+        setSelectAction(false)
+    }
     return (
-        <ScrollView className="h-full w-full flex">
+        <ScrollView className="h-full w-full">
             <View className="py-10">
                 <View className="flex-row space-x-5 px-3 items-center">
                     <View className="w-14 h-14 bg-zinc-200 flex justify-center items-center rounded-full">
@@ -42,6 +59,10 @@ const PostScreen = () => {
                 </View>
                 <TouchableOpacity className="w-80 h-12 bg-blue-800 self-center rounded-2xl mt-5 flex justify-center items-center"><Text className="text-white">Post</Text></TouchableOpacity>
             </View>
+           { selectAction && ( <Animated.View style={animatedStyleY} className="h-36 w-full bg-zinc-100 border-t-2 border-t-zinc-200 absolute top-[80%] flex-row pt-3 space-x-7 items-center px-5">
+                <TouchableOpacity onPress={()=>{navigation.navigate('camera')}} className="h-[80px] rounded-full w-[80px] bg-zinc-300 flex items-center justify-center space-y-1"><Icon name="camera" size={25} color={`grey`} /><Text>Camera</Text></TouchableOpacity>
+                <TouchableOpacity onPress={handlegallery} className="h-[80px] rounded-full w-[80px] bg-zinc-300 flex items-center justify-center space-y-1"><Icon name="library" size={25} color={`grey`} /><Text>Gallery</Text></TouchableOpacity>
+            </Animated.View>) }
         </ScrollView>
     );
 };

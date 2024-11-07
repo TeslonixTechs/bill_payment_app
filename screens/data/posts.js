@@ -183,4 +183,37 @@ export const postData = [
         isLiked: false,
         date: '4 days ago'
     },
+    {
+        id: 18,
+        name: 'Teslonix',
+        likes: 3478,
+        comments: 442,
+        shares: 78,
+        image: image2,
+        postImage: image2,
+        isLiked: false,
+        date: '4 days ago'
+    },
+    {
+        id: 19,
+        name: 'Teslonix',
+        likes: 3478,
+        comments: 442,
+        shares: 78,
+        image: image4,
+        postImage: image4,
+        isLiked: false,
+        date: '4 days ago'
+    },
+    {
+        id: 20,
+        name: 'Teslonix',
+        likes: 3478,
+        comments: 442,
+        shares: 78,
+        image: image6,
+        postImage: image6,
+        isLiked: false,
+        date: '4 days ago'
+    },
 ];
