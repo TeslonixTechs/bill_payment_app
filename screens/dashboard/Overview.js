@@ -3,17 +3,21 @@ import { Animated, TextInput, View, StatusBar, Text, Image, TouchableOpacity, Ke
 import { useNavigation } from '@react-navigation/native';
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import Icon2 from '@expo/vector-icons/FontAwesome6';
-
-const Header = () => {
+import Header from '../components/Header';
+import AccountInfo from '../components/AccountInfo';
+import ServiceList from '../components/ServiceList';
+const Dashboard = () => {
 	const navigation = useNavigation();
 	return (
-		<View className="flex-row mb-5 justify-between items-center">
-			<View className="h-14 w-14 rounded-full bg-zinc-300"></View>
-			<View>
-				<TouchableOpacity onPress={()=>{navigation.navigate('listnotification')}}><Icon name="bell-outline" size={25} color="#666" /></TouchableOpacity>
-			</View>	
+		<View className="h-full w-full bg-[#f1f1f1]">
+			<StatusBar />
+			<SafeAreaView className="p-3 flex space-y-5">
+				<Header />
+				<AccountInfo />
+				<ServiceList />
+			</SafeAreaView>
 		</View>
-	)
+	);
 };
 
-export default Header;
+export default Dashboard;

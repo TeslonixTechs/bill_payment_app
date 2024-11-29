@@ -4,14 +4,13 @@ import { useNavigation } from '@react-navigation/native';
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import Icon2 from '@expo/vector-icons/FontAwesome6';
 
-const Header = () => {
-	const navigation = useNavigation();
+const Header = ({heading}) => {
 	return (
-		<View className="flex-row mb-5 justify-between items-center">
-			<View className="h-14 w-14 rounded-full bg-zinc-300"></View>
-			<View>
-				<TouchableOpacity onPress={()=>{navigation.navigate('listnotification')}}><Icon name="bell-outline" size={25} color="#666" /></TouchableOpacity>
-			</View>	
+		<View className="flex-row mb-5 space-x-4 items-center">
+            <TouchableOpacity className="flex justify-center items-center h-10 w-10 rounded-full bg-[#34c759]">
+                <Icon name="chevron-left" color="#fff" size={20} />
+            </TouchableOpacity>
+            <Text className="text-[#333] text-xl">{heading}</Text>
 		</View>
 	)
 };

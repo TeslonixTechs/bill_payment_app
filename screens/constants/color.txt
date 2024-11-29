@@ -1,0 +1,15 @@
+#f7f7f7 // bg p // #f9f9f9
+#ffffff //bg s // #f1c40f
+#333333 //text p
+#666666 //text s
+#34c759 //cta p
+#4caf50 //cta s
+#ffc107 //accent
+#ff0000 //error
+#4caf50 // button b // #34c759 // #2ecc71
+#ffffff // text b // #ffffff
+#4caf50 // border // #34c759
+#34c759 // hover // #4caf50
+#3e8e41 // active // #3e8e41
+#3498db // #4567b7 // #8bc34a // #6495ed // #3e8e41
+#3498db // #2ecc71 // #666666

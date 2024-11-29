@@ -2,54 +2,59 @@ import React, { useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { View, Text, Image, ActivityIndicator } from "react-native";
-import SplashScreen from "./screens/SplashScreen";
-import LoginScreen from "./screens/LoginScreen";
-import Registration from "./screens/Registration";
-import MainScreenTab from "./screens/MainScreenTab";
-import StoryScreen from "./screens/components/StoryScreen";
-import NotificationScreen from "./screens/components/NotificationScreen";
-import ProfileScreen from "./screens/components/ProfileScreen";
-import ChatScreen from "./screens/components/ChatScreen";
-import MessageScreen from "./screens/components/MessageScreen";
-import ShowNotificationScreen from './screens/components/ShowNotificationScreen';
-import VerificationScreen from './screens/VerificationScreen';
-import CollectionScreen from './screens/components/CollectionScreen';
-import TermsPoliciesScreen from './screens/components/TermsPoliciesScreen';
-import HelpScreen from './screens/components/HelpScreen';
-import ActivityScreen from './screens/components/ActivityScreen';
-import BlockActivityScreen from './screens/components/BlockActivityScreen';
-import CameraScreen from "./screens/components/CameraScreen";
 import { PaperProvider } from 'react-native-paper';
+import SplashScreen from './screens/onboarding/SplashScreen';
+import Onboarding from './screens/onboarding/Onboarding';
+import LoginScreen from './screens/onboarding/LoginScreen';
+import RegistrationScreen from './screens/onboarding/RegistrationScreen';
+import PersonalDetails from './screens/onboarding/PersonalDetails';
+import VerifyDocuments from './screens/onboarding/VerifyDocuments';
+import AccountDetails from './screens/onboarding/AccountDetails';
+import Navigator from './screens/dashboard/Navigator';
+import Policies from './screens/onboarding/Policies';
+import SecureAccount from './screens/onboarding/SecureAccount';
+import Airtime from "./screens/transactionservices/Airtime";
+import Data from "./screens/transactionservices/Data";
+import Deposit from "./screens/transactionservices/Deposit";
+import Invest from "./screens/transactionservices/Invest";
+import Transfer from "./screens/transactionservices/Transfer";
+import TvBills from "./screens/transactionservices/TvBills";
+import ElectricityBills from "./screens/transactionservices/ElectricityBills";
+import ListNotification from './screens/notification/ListNotification';
+import ViewNotification from './screens/notification/ViewNotification';
 export default function App() {
     const Stack = createNativeStackNavigator();
     return (
         <PaperProvider>
             <NavigationContainer>
                 <Stack.Navigator
-                    initialRouteName="main_app_screen"
+                    initialRouteName="splash_screen"
                     screenOptions={{
                         headerShown: false
                     }}
                 >
+                    {/* onboarding routes */}
                     <Stack.Screen name="splash_screen" component={SplashScreen} />
-                    <Stack.Screen name="verification_screen" component={VerificationScreen} />
+                    <Stack.Screen name="onboarding" component={Onboarding} />
                     <Stack.Screen name="login_screen" component={LoginScreen} />
-                    <Stack.Screen name="registration_screen" component={Registration} />
-                    <Stack.Screen name="main_app_screen" component={MainScreenTab} />
-                    <Stack.Screen name="story_screen" component={StoryScreen} />
-                    <Stack.Screen name="notification_screen" component={NotificationScreen} />
-                    <Stack.Screen name="profile" component={ProfileScreen} />
-                    <Stack.Screen name="chats" component={ChatScreen} />
-                    <Stack.Screen name="message" component={MessageScreen} />
-                    <Stack.Screen name="view_notification" component={ShowNotificationScreen} />
-                    <Stack.Screen name="collection" component={CollectionScreen} />
-                    <Stack.Screen name="termsandpolicies" component={TermsPoliciesScreen} />
-                    <Stack.Screen name="help" component={HelpScreen} />
-                    <Stack.Screen name="activity" component={ActivityScreen} />
-                    <Stack.Screen name="camera" component={CameraScreen} />
-                    <Stack.Screen name="block" component={BlockActivityScreen} />
+                    <Stack.Screen name="registration_screen" component={RegistrationScreen} />
+                    <Stack.Screen name="personal_details" component={PersonalDetails} />
+                    <Stack.Screen name="verifydocuments" component={VerifyDocuments} />
+                    <Stack.Screen name="accountdetails" component={AccountDetails} />
+                    <Stack.Screen name="policies" component={Policies} />
+                    <Stack.Screen name="secureaccount" component={SecureAccount} />
+                    {/* dashboard routes */}
+                    <Stack.Screen name="screentab" component={Navigator} />
+                    {/* transaction routes */}
+                    <Stack.Screen name="buyairtime" component={Airtime} />
+                    <Stack.Screen name="buydata" component={Data} />
+                    <Stack.Screen name="depositmoney" component={Deposit} />
+                    <Stack.Screen name="electricitybills" component={ElectricityBills} />
+                    <Stack.Screen name="investmoney" component={Invest} />
+                    <Stack.Screen name="transfermoney" component={Transfer} />
+                    <Stack.Screen name="tvbills" component={TvBills} />
                 </Stack.Navigator>
             </NavigationContainer>  
-        </PaperProvider>      
+        </PaperProvider>
     );
 };
