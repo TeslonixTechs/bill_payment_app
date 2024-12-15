@@ -33,7 +33,7 @@ export default function App() {
                         headerShown: false
                     }}
                 >
-                    {/* onboarding routes */}
+                    {/* onboarding screens */}
                     <Stack.Screen name="splash_screen" component={SplashScreen} />
                     <Stack.Screen name="onboarding" component={Onboarding} />
                     <Stack.Screen name="login_screen" component={LoginScreen} />
@@ -43,9 +43,9 @@ export default function App() {
                     <Stack.Screen name="accountdetails" component={AccountDetails} />
                     <Stack.Screen name="policies" component={Policies} />
                     <Stack.Screen name="secureaccount" component={SecureAccount} />
-                    {/* dashboard routes */}
+                    {/* dashboard screens */}
                     <Stack.Screen name="screentab" component={Navigator} />
-                    {/* transaction routes */}
+                    {/* transaction screens */}
                     <Stack.Screen name="buyairtime" component={Airtime} />
                     <Stack.Screen name="buydata" component={Data} />
                     <Stack.Screen name="depositmoney" component={Deposit} />
@@ -53,6 +53,9 @@ export default function App() {
                     <Stack.Screen name="investmoney" component={Invest} />
                     <Stack.Screen name="transfermoney" component={Transfer} />
                     <Stack.Screen name="tvbills" component={TvBills} />
+                    {/* notification screens */}
+                    <Stack.Screen name="listnotification" component={ListNotification} />
+                    <Stack.Screen name="viewnotification" component={ViewNotification} />
                 </Stack.Navigator>
             </NavigationContainer>  
         </PaperProvider>

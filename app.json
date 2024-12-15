@@ -2,41 +2,38 @@
   "expo": {
     "name": "microfinancebank",
     "slug": "microfinancebank",
+    "owner": "samuel oni",
+    "newArchEnabled": true,
     "version": "1.0.0",
+    "platforms": ["ios", "android", "web"],
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "assets/splash.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/icon.png",
+      "image": "assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#fff"
+      "backgroundColor": "#ffffff"
     },
-    "newArchEnabled": true,
-    "bridgeless": true,
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.png",
+        "foregroundImage": "assets/splash.png",
         "backgroundColor": "#ffffff"
-      },
-      "permissions": [
-        "AUDIO_RECORDING",
-        "CAMERA",
-        "CAMERA_ROLL",
-        "CONTACTS",
-        "LOCATION",
-        "MICROPHONE",
-        "PHONE_STATE",
-        "READ_EXTERNAL_STORAGE",
-        "RECORD_AUDIO",
-        "VIDEO_LIBRARY",
-        "WRITE_EXTERNAL_STORAGE"
-      ]
+      }
     },
     "web": {
-      "favicon": "./assets/icon.png"
-    }
+      "favicon": "assets/images/logo-sm.png"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/18adc0d0-eb1d-11e9-8009-d524ed5cc4a7"
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "plugins": ["expo-asset", "expo-font"]
   }
 }
+
